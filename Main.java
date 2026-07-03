@@ -5,3 +5,8 @@ public class Main {
         new MenuPrincipal().exibir();
     }
 }
+/*
+ * Ponto de entrada do sistema de biblioteca.
+ * Inicia a aplicação instanciando o MenuPrincipal e exibindo o menu,
+ * delegando a ele todo o controle do fluxo do programa.
+ */
