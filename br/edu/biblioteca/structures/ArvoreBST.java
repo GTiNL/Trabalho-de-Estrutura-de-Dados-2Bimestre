@@ -3,7 +3,9 @@ package br.edu.biblioteca.structures;
 // Arvore Binaria de Busca - usada como indice para busca por ISBN ou titulo
 public class ArvoreBST<K extends Comparable<K>, V> {
 
-    // No interno da arvore
+    // No interno da arvore.
+    // Cada no e como uma "caixinha" que guarda um par (chave, valor) e
+    // aponta para no maximo dois outros nos: o filho esquerdo e o direito.
     private class No {
         K chave;
         V valor;
@@ -21,6 +23,7 @@ public class ArvoreBST<K extends Comparable<K>, V> {
     private No raiz;
     private int size;
 
+
     public ArvoreBST() {
         this.raiz = null;
         this.size = 0;
@@ -30,6 +33,22 @@ public class ArvoreBST<K extends Comparable<K>, V> {
     public void put(K chave, V valor) {
         raiz = inserir(raiz, chave, valor);
     }
+
+    /*
+     * Insercao recursiva.
+     * A cada chamada, comparamos a chave que queremos inserir com a chave
+     * do no atual:
+     *  - se for menor, "descemos" para a subarvore esquerda
+     *  - se for maior, "descemos" para a subarvore direita
+     *  - se for igual, ja existe: apenas atualizamos o valor
+     *
+     * Quando chegamos em um no == null, significa que encontramos o lugar
+     * correto (uma "folha vazia") para pendurar o novo no.
+     *
+     * Repare no padrao "no.esquerda = inserir(no.esquerda, ...)":
+     * isso reconecta a subarvore modificada de volta ao pai, garantindo
+     * que a arvore inteira fique corretamente ligada apos a insercao.
+     */
 
     private No inserir(No no, K chave, V valor) {
         if (no == null) {
@@ -87,6 +106,29 @@ public class ArvoreBST<K extends Comparable<K>, V> {
         return valor;
     }
 
+
+    /*
+     * Remocao recursiva — a operacao mais delicada da BST.
+     * Primeiro "descemos" ate encontrar o no com a chave desejada, igual
+     * na busca. Depois de encontra-lo, existem 3 casos possiveis:
+     *
+     * Caso 1 - no sem filho esquerdo:
+     *   simplesmente "promovemos" o filho direito para o lugar do no
+     *   removido (se tambem nao houver filho direito, ele vira null,
+     *   o que representa corretamente um no sem filhos sendo removido).
+     *
+     * Caso 2 - no sem filho direito:
+     *   simetrico ao caso 1: promovemos o filho esquerdo.
+     *
+     * Caso 3 - no com dois filhos:
+     *   nao da pra simplesmente apagar, pois isso quebraria as duas
+     *   subarvores. A solucao classica: buscamos o "sucessor" — o menor
+     *   valor da subarvore direita (que e o proximo valor em ordem
+     *   crescente depois do no removido). Copiamos a chave/valor do
+     *   sucessor para o no atual, e entao removemos o sucessor de dentro
+     *   da subarvore direita (ele com certeza cai no caso 1, pois o
+     *   menor elemento de uma subarvore nunca tem filho esquerdo).
+     */
     private No remover(No no, K chave) {
         if (no == null) {
             return null;
