@@ -2,11 +2,11 @@ package br.edu.biblioteca.model;
 
 public class Usuario {
 
-    private int id;
-    private String nome;
-    private TipoUsuario tipo;
-    private String email;
-    private boolean bloqueado;
+    private int id; // Identificador único do usuário
+    private String nome; // Nome do usuário
+    private TipoUsuario tipo; // Tipo do usuário (Aluno, Professor, etc.)
+    private String email; // Endereço de e-mail do usuário
+    private boolean bloqueado; // Indica se o usuário está bloqueado
 
     public Usuario(int id, String nome, TipoUsuario tipo, String email) {
         this.id = id;
