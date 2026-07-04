@@ -4,11 +4,11 @@ import java.time.LocalDate;
 
 public class Notificacao {
 
-    private int id;
-    private int usuarioId;
-    private String mensagem;
-    private LocalDate data;
-    private boolean lida;
+    private int id; // Identificador único da notificação
+    private int usuarioId; // ID do usuário que receberá a notificação
+    private String mensagem;   // Mensagem da notificação
+    private LocalDate data; // Data em que a notificação foi criada
+    private boolean lida; // Indica se a notificação já foi lida
 
     public Notificacao(int id, int usuarioId, String mensagem, LocalDate data) {
         this.id = id;
