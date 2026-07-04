@@ -2,11 +2,11 @@ package br.edu.biblioteca.model;
 
 public class Multa {
 
-    private int id;
-    private int emprestimoId;
-    private double valor;
-    private int diasAtraso;
-    private boolean quitada;
+    private int id;   // Identificador único da reserva
+    private int emprestimoId;  // ID do usuário que realizou a reserva
+    private double valor; // ISBN do livro reservado
+    private int diasAtraso; // Data em que a reserva foi realizada
+    private boolean quitada;  // Status atual da reserva
 
     public Multa(int id, int emprestimoId, double valor, int diasAtraso) {
         this.id = id;
